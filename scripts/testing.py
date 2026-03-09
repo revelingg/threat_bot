@@ -1,1 +1,0 @@
-Open SSH on 192.168.1.10 and HTTP on 192.168.1.12 detected.
