@@ -1,6 +1,18 @@
 import requests, json, time
 
 #import the current section from github
+
+"""
+    Description: This file is meant to filtre the data from mitre 
+
+        1. First we get the raw link from Mitre gitub page using response
+        2. we store the result into data our json variable for now
+        3. Based on the keywords we set, we then go through the data dictionary for matching names/keywords
+        4. if it matches, we get the id and phase_name and then add that into our technique dict
+        5. After making a format of relevant techs, we append it to our relevant tech list
+        6. With that, the relevant techs are then written to our filtered json file ready to be used by the rest of the program
+"""
+
 url = 'https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json'
 response = requests.get(url)
 

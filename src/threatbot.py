@@ -10,6 +10,13 @@ load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY")
 
 def main():
+    """
+        Description: This runs the system for the bot, as it calls the retrieval system and feeds it into OpenAI model
+        Input: Options 1-3 from the menu lets users figure out which function they want to use
+        Output: The query is then returned form the retrieve object as text format, passed into the AI
+            - the AI then takes that information along with the prompt and puts that into output for the user  
+    """
+    
     #initialize retriever
     try:
         retriever = MitreRetriever(api_key=API_KEY)
@@ -27,7 +34,7 @@ def main():
         print("1️⃣  Write your own query")
         print("2️⃣  Parse network scan / file data")
         print("3️⃣  Exit")
-        print("Always remeber! Ctrl+C to force quit @@@👋")
+        print("Always remember! Ctrl+C to force quit @@@👋")
         print("="*50)
         
         choice = input("\nEnter your choice (1/2/3): ").strip()
@@ -42,6 +49,7 @@ def main():
             
             try:
                 #retrieve data
+                print("\n---------------LoADiNg-------------------\n")
                 top_results = retriever.query(query,top_n=5)
                 if not top_results:
                     print("Alert!! No relevant techniques found.@@@\n")
@@ -68,8 +76,8 @@ def main():
                     messages=[{"role": "user", "content": prompt}]
                 )
                 #output
-                output = response.choices[0].message.content
-                print("\n--- Threat Intelligence Analysis ---\n")
+                output = response.choices[0].message.content #always uses first in the cycle
+                print("\n--- 🛡️Threat Intelligence Analysis🛡️---\n")
                 print(output)
                 print("\n----------------------------------\n")
                 
